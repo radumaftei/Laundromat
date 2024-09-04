@@ -7,6 +7,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { DeleteMachineModel } from './delete.model';
 
 @Component({
   selector: 'app-washing-machine-delete-modal',
@@ -29,6 +30,7 @@ export class WashingMachineDeleteModalComponent {
   close(closeOption: 'no' | 'ok') {
     this.dialogRef.close({
       result: closeOption,
-    });
+      id: closeOption === 'ok' ? this.id : undefined,
+    } as DeleteMachineModel);
   }
 }

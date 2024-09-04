@@ -7,14 +7,11 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
+import { tap } from 'rxjs';
 import { Location } from './app.model';
 import { AppService } from './app.service';
 import { WashingMachineCardComponent } from './components/washing-machine-card/washing-machine-card.component';
-import { tap } from 'rxjs';
-import { Store } from '@ngxs/store';
-import * as WashingMachinesActions from './store/machines/washing-machines.actions';
 import { StoreServiceFacade } from './store/store.service';
-import { WashingMachinesState } from './store/machines/washing-machines.state';
 
 @Component({
   selector: 'app-root',
@@ -55,13 +52,5 @@ export class AppComponent {
     this.selectedLocation.set(
       this.locations()?.find((item) => item.name === event.value)
     );
-  }
-
-  // temporary
-  private store = inject(Store);
-  constructor() {
-    this.store.select(WashingMachinesState.getState).subscribe((storeData) => {
-      console.log('storeData', storeData);
-    });
   }
 }

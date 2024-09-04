@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { Machine } from '../../app.model';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
-import { WashingMachineEditModalComponent } from '../washing-machine-edit-modal/washing-machine-edit-modal.component';
 import { WashingMachineDeleteModalComponent } from '../washing-machine-delete-modal/washing-machine-delete-modal.component';
+import { WashingMachineEditModalComponent } from '../washing-machine-edit-modal/washing-machine-edit-modal.component';
 
-import * as WashingMachinesActions from '../../store/machines/washing-machines.actions';
 import { Subscription } from 'rxjs';
 import { StoreServiceFacade } from '../../store/store.service';
+import { DeleteMachineModel } from '../washing-machine-delete-modal/delete.model';
 import { EditMachineModel } from '../washing-machine-edit-modal/edit.model';
 
 @Component({
@@ -35,7 +35,6 @@ export class WashingMachineCardComponent implements OnDestroy {
 
     this.subscription.add(
       dialogRef.beforeClosed().subscribe((data: EditMachineModel) => {
-        debugger;
         if (data?.result === 'save' && data.id && data.newMachine) {
           this.storeServiceFacade.dispatchEditMachine(data.id, data.newMachine);
         }
@@ -49,7 +48,13 @@ export class WashingMachineCardComponent implements OnDestroy {
       data: this.machine.id,
     });
 
-    this.subscription.add(dialogRef.beforeClosed().subscribe((data) => {}));
+    this.subscription.add(
+      dialogRef.beforeClosed().subscribe((data: DeleteMachineModel) => {
+        if (data?.result === 'ok' && data.id) {
+          this.storeServiceFacade.dispatchDeleteMachine(data.id);
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {
