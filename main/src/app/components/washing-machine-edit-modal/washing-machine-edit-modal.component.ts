@@ -8,7 +8,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { Machine } from '../app.model';
+import { Machine } from '../../app.model';
 import {
   FormBuilder,
   FormGroup,
@@ -86,8 +86,8 @@ export class WashingMachineEditModalComponent implements OnInit {
   close(closeOption: 'cancel' | 'save') {
     console.log('this.form', this.editMachineForm);
 
-    // this.dialogRef.close({
-    //   results: closeOption,
-    // });
+    this.dialogRef.close({
+      results: closeOption,
+    });
   }
 }

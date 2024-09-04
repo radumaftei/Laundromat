@@ -1,4 +1,4 @@
-@import "../../mixins.scss";
+@import "../../../mixins.scss";
 
 .laundry-card {
   max-width: 300px;
@@ -51,6 +51,10 @@
     .delete-icon {
       font-size: 1rem;
       margin-top: 5px;
+    }
+
+    .delete-button {
+      background-color: rgb(226, 47, 47);
     }
   }
 

@@ -1,4 +1,4 @@
-@import "../../mixins.scss";
+@import "../../../mixins.scss";
 
 .edit-machine-dialog-content {
   display: flex;
@@ -55,7 +55,6 @@ mat-form-field {
 
 mat-dialog-actions {
   padding-top: 16px;
-  border-top: 1px solid #bdbdbd;
 
   @include respond-to(mobile) {
     padding-top: 12px;

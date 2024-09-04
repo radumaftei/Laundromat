@@ -9,7 +9,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
 import { Location } from './app.model';
 import { AppService } from './app.service';
-import { WashingMachineCardComponent } from './washing-machine-card/washing-machine-card.component';
+import { WashingMachineCardComponent } from './components/washing-machine-card/washing-machine-card.component';
 
 @Component({
   selector: 'app-root',

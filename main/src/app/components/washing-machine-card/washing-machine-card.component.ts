@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Machine } from '../app.model';
+import { Machine } from '../../app.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { WashingMachineEditModalComponent } from '../washing-machine-edit-modal/washing-machine-edit-modal.component';
@@ -23,6 +23,7 @@ export class WashingMachineCardComponent {
     this.dialog.open(WashingMachineEditModalComponent, {
       minWidth: '80vw',
       data: this.machine,
+      disableClose: true,
     });
   }
 
