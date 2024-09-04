@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { Machine } from "./model";
 const cors = require("cors");
 
 const app = express();
@@ -6,10 +7,98 @@ const port = 3000;
 
 app.use(cors());
 
-const washingMachines = [
-  { id: 1, name: "PDW909", locationId: 2 },
-  { id: 2, name: "PWM509", locationId: 2 },
-  { id: 3, name: "PWM511", locationId: 1 },
+const washingMachines: Machine[] = [
+  {
+    id: 1,
+    name: "Machine A",
+    locationId: 2,
+    modelNumber: "PDW909",
+    status: "online",
+    installationDate: new Date("2022-01-15"),
+    lastMaintenanceDate: new Date("2024-07-30"),
+    maintenanceIntervalDays: 180,
+    loadCapacity: 500,
+    usageCount: 1200,
+    isUnderWarranty: true,
+  },
+  {
+    id: 2,
+    name: "Machine B",
+    locationId: 102,
+    modelNumber: "PWM509",
+    status: "maintenance",
+    installationDate: new Date("2021-06-20"),
+    lastMaintenanceDate: new Date("2024-08-10"),
+    maintenanceIntervalDays: 365,
+    loadCapacity: 750,
+    usageCount: 800,
+    isUnderWarranty: false,
+  },
+  {
+    id: 3,
+    name: "Machine C",
+    locationId: 3,
+    modelNumber: "PWM514",
+    status: "offline",
+    installationDate: new Date("2020-11-05"),
+    lastMaintenanceDate: new Date("2023-11-05"),
+    maintenanceIntervalDays: 365,
+    loadCapacity: 600,
+    usageCount: 1500,
+    isUnderWarranty: true,
+  },
+  {
+    id: 4,
+    name: "Machine D",
+    locationId: 1,
+    modelNumber: "PWM506",
+    status: "online",
+    installationDate: new Date("2023-03-10"),
+    lastMaintenanceDate: new Date("2024-03-10"),
+    maintenanceIntervalDays: 180,
+    loadCapacity: 400,
+    usageCount: 250,
+    isUnderWarranty: true,
+  },
+  {
+    id: 5,
+    name: "Machine E",
+    locationId: 1,
+    modelNumber: "PWM508",
+    status: "online",
+    installationDate: new Date("2022-09-25"),
+    lastMaintenanceDate: new Date("2024-05-30"),
+    maintenanceIntervalDays: 180,
+    loadCapacity: 650,
+    usageCount: 950,
+    isUnderWarranty: false,
+  },
+  {
+    id: 6,
+    name: "Machine F",
+    locationId: 1,
+    modelNumber: "PWM906",
+    status: "maintenance",
+    installationDate: new Date("2021-12-15"),
+    lastMaintenanceDate: new Date("2024-08-25"),
+    maintenanceIntervalDays: 365,
+    loadCapacity: 700,
+    usageCount: 600,
+    isUnderWarranty: true,
+  },
+  {
+    id: 7,
+    name: "Machine G",
+    locationId: 1,
+    modelNumber: "PWM907",
+    status: "offline",
+    installationDate: new Date("2020-04-10"),
+    lastMaintenanceDate: new Date("2023-12-10"),
+    maintenanceIntervalDays: 365,
+    loadCapacity: 800,
+    usageCount: 1300,
+    isUnderWarranty: false,
+  },
 ];
 
 const locations = [

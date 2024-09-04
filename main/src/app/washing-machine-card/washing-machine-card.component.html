@@ -1,0 +1,37 @@
+<mat-card class="laundry-card background-lalalal">
+  <mat-card-header>
+    <mat-icon class="card-icon">local_laundry_service</mat-icon>
+    <mat-card-title>{{ machine.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="machine-details">
+      <p><strong>Model Number:</strong> {{ machine.modelNumber }}</p>
+      <p><strong>Status:</strong> {{ machine.status | titlecase }}</p>
+      <p>
+        <strong>Installation Date:</strong>
+        {{ machine.installationDate | date : "longDate" }}
+      </p>
+      <p>
+        <strong>Last Maintenance Date:</strong>
+        {{ machine.lastMaintenanceDate | date : "longDate" }}
+      </p>
+      <p><strong>Load Capacity:</strong> {{ machine.loadCapacity }} kg</p>
+      <p><strong>Usage Count:</strong> {{ machine.usageCount }}</p>
+      <p>
+        <strong>Under Warranty:</strong>
+        {{ machine.isUnderWarranty ? "Yes" : "No" }}
+      </p>
+    </div>
+    <div class="actions">
+      <button (click)="editMachine()" class="edit-button" mat-fab extended>
+        <mat-icon class="edit-icon">edit</mat-icon>
+        Edit
+      </button>
+
+      <button (click)="deleteMachine()" class="delete-button" mat-fab extended>
+        <mat-icon class="delete-icon">delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

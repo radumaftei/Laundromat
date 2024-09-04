@@ -1,0 +1,78 @@
+@import "../../mixins.scss";
+
+.laundry-card {
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  box-shadow: none;
+  background: #f6f6f6;
+
+  @include respond-to(mobile) {
+    max-width: 100%;
+    margin: 16px;
+  }
+
+  mat-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-icon {
+    font-size: 48px;
+    color: gray;
+    margin-bottom: 8px;
+    width: 100px;
+    height: 50px;
+  }
+
+  mat-card-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  mat-card-content p {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .edit-button,
+    .delete-button {
+      max-height: 40px;
+    }
+
+    .edit-icon,
+    .delete-icon {
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+  }
+
+  //   .features-list {
+  //     list-style: none;
+  //     padding: 0;
+  //     margin: 0;
+
+  //     li {
+  //       padding: 8px 0;
+  //       font-size: 0.9rem;
+
+  //       .subtext {
+  //         font-size: 0.8rem;
+  //         color: #757575;
+  //       }
+
+  //       .feature-icon {
+  //         vertical-align: middle;
+  //         color: #4caf50;
+  //         margin-right: 4px;
+  //       }
+  //     }
+  //   }
+}

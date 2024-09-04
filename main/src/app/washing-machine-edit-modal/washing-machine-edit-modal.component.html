@@ -1,0 +1,123 @@
+<h2 mat-dialog-title>Edit {{ machine.name }}</h2>
+
+<mat-dialog-content class="edit-machine-dialog-content">
+  <form [formGroup]="editMachineForm">
+    <div class="form-row">
+      <!-- Machine Name -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Machine Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="editMachineForm.get('name')?.invalid"
+          >Machine Name is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Model Number -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Model Number</mat-label>
+        <input matInput formControlName="modelNumber" />
+        <mat-error *ngIf="editMachineForm.get('modelNumber')?.invalid"
+          >Model Number is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Status -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="online">Online</mat-option>
+          <mat-option value="offline">Offline</mat-option>
+          <mat-option value="maintenance">Maintenance</mat-option>
+        </mat-select>
+        <mat-error *ngIf="editMachineForm.get('status')?.invalid"
+          >Status is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <!-- Installation Date -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Installation Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          formControlName="installationDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="editMachineForm.get('installationDate')?.invalid"
+          >Installation Date is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Last Maintenance Date -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Last Maintenance Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          formControlName="lastMaintenanceDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="editMachineForm.get('lastMaintenanceDate')?.invalid"
+          >Last Maintenance Date is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <!-- Load Capacity -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Load Capacity (kg)</mat-label>
+        <input type="number" matInput formControlName="loadCapacity" />
+        <mat-error *ngIf="editMachineForm.get('loadCapacity')?.invalid"
+          >Valid Load Capacity is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Usage Count -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Usage Count</mat-label>
+        <input type="number" matInput formControlName="usageCount" />
+        <mat-error *ngIf="editMachineForm.get('usageCount')?.invalid"
+          >Valid Usage Count is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Under Warranty -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Under Warranty</mat-label>
+        <mat-select formControlName="isUnderWarranty">
+          <mat-option [value]="true">Yes</mat-option>
+          <mat-option [value]="false">No</mat-option>
+        </mat-select>
+        <mat-error *ngIf="editMachineForm.get('isUnderWarranty')?.invalid"
+          >Warranty status is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="close('cancel')" class="cancel-button">
+    Cancel
+  </button>
+  <button
+    mat-button
+    (click)="close('save')"
+    [disabled]="editMachineForm.invalid"
+    class="save-button"
+    cdkFocusInitial
+  >
+    Save
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,96 @@
+@import "../../mixins.scss";
+
+.edit-machine-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-x: hidden;
+
+  @include respond-to(tablet) {
+    overflow: hidden;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .form-field {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    @include respond-to(mobile) {
+      flex-direction: column;
+    }
+
+    @include respond-to(tablet) {
+      flex-direction: row;
+    }
+
+    @include respond-to(desktop) {
+      flex-direction: row;
+    }
+  }
+}
+
+mat-form-field {
+  background-color: #424242;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  @include respond-to(mobile) {
+    margin-bottom: 12px;
+  }
+
+  @include respond-to(tablet) {
+    margin-bottom: 16px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 16px;
+  }
+}
+
+mat-dialog-actions {
+  padding-top: 16px;
+  border-top: 1px solid #bdbdbd;
+
+  @include respond-to(mobile) {
+    padding-top: 12px;
+  }
+
+  @include respond-to(tablet) {
+    padding-top: 16px;
+  }
+
+  @include respond-to(desktop) {
+    padding-top: 16px;
+  }
+}
+
+mat-dialog-actions {
+  display: flex;
+  gap: 15px;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+  }
+
+  .cancel-button {
+    color: rgb(226, 47, 47);
+  }
+
+  .save-button {
+    @include respond-to(mobile) {
+      margin-left: 0;
+    }
+  }
+
+  button {
+    @include respond-to(mobile) {
+      width: 100%;
+    }
+  }
+}
