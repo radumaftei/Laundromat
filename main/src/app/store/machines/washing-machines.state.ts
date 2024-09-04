@@ -33,14 +33,19 @@ export class WashingMachinesState {
   @Action(Actions.WashingMachinesEditAction)
   edit(
     ctx: StateContext<WashingMachinesStateModel>,
-    { machineToEdit }: Actions.WashingMachinesEditAction
+    {
+      machineToEditPayload: { id, newMachine },
+    }: Actions.WashingMachinesEditAction
   ) {
     const stateModel = ctx.getState();
 
     ctx.setState({
       machines: stateModel.machines.map((machine) => {
-        if (machine.id === machineToEdit.id) {
-          return machineToEdit;
+        if (machine.id === id) {
+          return {
+            ...machine,
+            ...newMachine,
+          };
         }
         return machine;
       }),

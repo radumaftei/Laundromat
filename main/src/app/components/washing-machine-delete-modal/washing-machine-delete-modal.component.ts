@@ -28,7 +28,7 @@ export class WashingMachineDeleteModalComponent {
 
   close(closeOption: 'no' | 'ok') {
     this.dialogRef.close({
-      results: closeOption,
+      result: closeOption,
     });
   }
 }

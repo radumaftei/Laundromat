@@ -27,6 +27,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { EditMachineModel } from './edit.model';
 
 @Component({
   selector: 'app-washing-machine-edit-modal',
@@ -84,10 +85,10 @@ export class WashingMachineEditModalComponent implements OnInit {
   }
 
   close(closeOption: 'cancel' | 'save') {
-    console.log('this.form', this.editMachineForm);
-
     this.dialogRef.close({
-      results: closeOption,
-    });
+      result: closeOption,
+      id: this.machine.id,
+      newMachine: this.editMachineForm.value,
+    } as EditMachineModel);
   }
 }

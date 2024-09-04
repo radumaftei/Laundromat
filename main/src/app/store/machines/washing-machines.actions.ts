@@ -7,7 +7,12 @@ export class WashingMachinesAction {
 
 export class WashingMachinesEditAction {
   static readonly type = '[WashingMachines] Edit machine';
-  constructor(readonly machineToEdit: Machine) {}
+  constructor(
+    readonly machineToEditPayload: {
+      newMachine: Omit<Machine, 'id'>;
+      id: number;
+    }
+  ) {}
 }
 
 export class WashingMachinesDeleteAction {
