@@ -6,9 +6,7 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
-import { merge } from 'rxjs';
 import { Location } from './app.model';
 import { AppService } from './app.service';
 import { WashingMachineCardComponent } from './components/washing-machine-card/washing-machine-card.component';
@@ -55,5 +53,9 @@ export class AppComponent implements OnInit {
     this.selectedLocation.set(
       this.locations()?.find((item) => item.name === event.value)
     );
+  }
+
+  selectLocationByMachine(locationId: number): Location | undefined {
+    return this.locations().find((e) => e.id === locationId);
   }
 }

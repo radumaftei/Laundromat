@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { Machine } from '../../app.model';
+import { Location, Machine } from '../../app.model';
 import { WashingMachineDeleteModalComponent } from '../washing-machine-delete-modal/washing-machine-delete-modal.component';
 import { WashingMachineEditModalComponent } from '../washing-machine-edit-modal/washing-machine-edit-modal.component';
 
@@ -25,6 +25,7 @@ export class WashingMachineCardComponent implements OnDestroy {
   private readonly dialog = inject(MatDialog);
   private readonly storeServiceFacade = inject(StoreServiceFacade);
   @Input() machine!: Machine;
+  @Input() location?: Location;
 
   editMachine() {
     const dialogRef = this.dialog.open(WashingMachineEditModalComponent, {
@@ -45,7 +46,10 @@ export class WashingMachineCardComponent implements OnDestroy {
   deleteMachine() {
     const dialogRef = this.dialog.open(WashingMachineDeleteModalComponent, {
       minWidth: '80vw',
-      data: this.machine.id,
+      data: {
+        machine: this.machine,
+        location: this.location,
+      },
     });
 
     this.subscription.add(

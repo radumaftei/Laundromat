@@ -24,7 +24,7 @@ const washingMachines: Machine[] = [
   {
     id: 2,
     name: "Machine B",
-    locationId: 102,
+    locationId: 1,
     modelNumber: "PWM509",
     status: "maintenance",
     installationDate: new Date("2021-06-20"),

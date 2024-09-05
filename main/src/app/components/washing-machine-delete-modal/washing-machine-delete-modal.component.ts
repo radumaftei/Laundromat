@@ -7,6 +7,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { Location, Machine } from '../../app.model';
 import { DeleteMachineModel } from './delete.model';
 
 @Component({
@@ -24,13 +25,14 @@ import { DeleteMachineModel } from './delete.model';
 export class WashingMachineDeleteModalComponent {
   constructor(
     public dialogRef: MatDialogRef<WashingMachineDeleteModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public id: number
+    @Inject(MAT_DIALOG_DATA)
+    public data: { machine: Machine; location?: Location }
   ) {}
 
   close(closeOption: 'no' | 'ok') {
     this.dialogRef.close({
       result: closeOption,
-      id: closeOption === 'ok' ? this.id : undefined,
+      id: closeOption === 'ok' ? this.data.machine.id : undefined,
     } as DeleteMachineModel);
   }
 }

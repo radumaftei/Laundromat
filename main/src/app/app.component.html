@@ -12,7 +12,10 @@
 
   <div class="machines">
     @for (machine of selectedMachines(); track machine.id) {
-    <app-washing-machine-card [machine]="machine"></app-washing-machine-card>
+    <app-washing-machine-card
+      [machine]="machine"
+      [location]="selectLocationByMachine(machine.locationId)"
+    ></app-washing-machine-card>
     } @empty {
     <li>There are no machines available.</li>
     }
