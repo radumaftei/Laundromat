@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   computed,
+  effect,
   ElementRef,
   inject,
   OnInit,
@@ -47,6 +48,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   locations = this.storeServiceFacade.locations;
   selectedLocation: WritableSignal<Location | undefined> = signal(undefined);
 
+  constructor() {
+    effect(() => {
+      if (this.machines().length) {
+        setTimeout(() => this.onScroll(), 300);
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.appService.getMachines().subscribe((machines) => {
       this.storeServiceFacade.dispatchWashingMachines(machines);
@@ -59,9 +68,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.preventScrolling();
-    setTimeout(() => {
-      this.onScroll();
-    }, 200);
   }
 
   preventScrolling() {

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -21,6 +21,7 @@ import { DeleteMachineModel } from './delete.model';
   ],
   templateUrl: './washing-machine-delete-modal.component.html',
   styleUrl: './washing-machine-delete-modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WashingMachineDeleteModalComponent {
   constructor(

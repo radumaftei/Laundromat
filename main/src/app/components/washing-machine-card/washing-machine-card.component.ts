@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,6 +25,7 @@ import { EditMachineModel } from '../washing-machine-edit-modal/edit.model';
   imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule],
   templateUrl: './washing-machine-card.component.html',
   styleUrl: './washing-machine-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WashingMachineCardComponent implements OnDestroy {
   private readonly subscription = new Subscription();

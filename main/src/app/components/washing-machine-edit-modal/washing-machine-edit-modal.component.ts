@@ -1,21 +1,17 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import { Machine } from '../../app.model';
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatError, MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -24,9 +20,18 @@ import {
   NativeDateAdapter,
 } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { CommonModule } from '@angular/common';
-import { MatSelectModule } from '@angular/material/select';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { Machine } from '../../app.model';
 import { EditMachineModel } from './edit.model';
 
 @Component({
@@ -53,6 +58,7 @@ import { EditMachineModel } from './edit.model';
   ],
   templateUrl: './washing-machine-edit-modal.component.html',
   styleUrl: './washing-machine-edit-modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WashingMachineEditModalComponent implements OnInit {
   editMachineForm!: FormGroup;
