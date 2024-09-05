@@ -8,14 +8,14 @@
     </p>
   </div>
 
-  <div class="summary-section">
+  <div class="summary-section" *ngIf="machines().length">
     <p>Total Machines: {{ totalMachines() }}</p>
     <p>Online: {{ onlineMachines() }}</p>
     <p>Offline: {{ offlineMachines() }}</p>
     <p>Under Maintenance: {{ maintenanceMachines() }}</p>
   </div>
 
-  <div class="locations">
+  <div class="locations" *ngIf="locations().length">
     <mat-chip-listbox
       class="mat-mdc-chip-set-stacked"
       (change)="onLocationChange($event)"
@@ -43,7 +43,12 @@
           [location]="selectLocationByMachine(machine.locationId)"
         ></app-washing-machine-card>
         } @empty {
-        <li>There are no machines available.</li>
+        <div class="no-machines-message">
+          <p>
+            <i class="material-icons">info</i> There are no machines available
+            for {{ selectedLocation()?.name || "Unknown" }}.
+          </p>
+        </div>
         }
       </div>
     </div>
