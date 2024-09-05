@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   inject,
   Input,
   OnDestroy,
@@ -31,6 +32,8 @@ export class WashingMachineCardComponent implements OnDestroy {
   private readonly subscription = new Subscription();
   private readonly dialog = inject(MatDialog);
   private readonly storeServiceFacade = inject(StoreServiceFacade);
+  readonly elementRef = inject(ElementRef);
+
   @Input() machine!: Machine;
   @Input() location?: Location;
 

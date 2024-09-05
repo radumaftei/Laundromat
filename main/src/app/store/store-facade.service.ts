@@ -16,6 +16,19 @@ export class StoreServiceFacade {
   readonly machines = this.store.selectSignal(WashingMachinesState.getMachines);
   readonly locations = this.store.selectSignal(LocationState.getLocations);
 
+  readonly totalMachines = this.store.selectSignal(
+    WashingMachinesState.getTotalMachines
+  );
+  readonly onlineMachines = this.store.selectSignal(
+    WashingMachinesState.getTotalOnlineMachines
+  );
+  readonly offlineMachines = this.store.selectSignal(
+    WashingMachinesState.getTotalOfflineMachines
+  );
+  readonly maintenanceMachines = this.store.selectSignal(
+    WashingMachinesState.getTotalUnderMaintenanceMachines
+  );
+
   dispatchWashingMachines(machines: Machine[]) {
     this.store.dispatch(
       new WashingMachinesActions.SetWashingMachines(machines)

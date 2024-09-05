@@ -1,4 +1,20 @@
+<app-header></app-header>
+
 <main class="main">
+  <div class="explanatory-text">
+    <p>
+      Let's select a location to see the machines available at that location.
+      You can scroll through the machines and edit or delete them as needed.
+    </p>
+  </div>
+
+  <div class="summary-section">
+    <p>Total Machines: {{ totalMachines() }}</p>
+    <p>Online: {{ onlineMachines() }}</p>
+    <p>Offline: {{ offlineMachines() }}</p>
+    <p>Under Maintenance: {{ maintenanceMachines() }}</p>
+  </div>
+
   <div class="locations">
     <mat-chip-listbox
       class="mat-mdc-chip-set-stacked"
@@ -11,7 +27,11 @@
   </div>
 
   <div class="card-carousel-container">
-    <button class="carousel-arrow left-arrow" (click)="scroll('left')">
+    <button
+      *ngIf="currentClientWidth() > 480"
+      class="carousel-arrow left-arrow"
+      (click)="scroll('left')"
+    >
       &lt;
     </button>
 
@@ -28,8 +48,18 @@
       </div>
     </div>
 
-    <button class="carousel-arrow right-arrow" (click)="scroll('right')">
+    <button
+      *ngIf="currentClientWidth() > 480"
+      class="carousel-arrow right-arrow"
+      (click)="scroll('right')"
+    >
       &gt;
+    </button>
+  </div>
+
+  <div class="help-button">
+    <button mat-icon-button (click)="openHelpModal()">
+      <mat-icon>help_outline</mat-icon>
     </button>
   </div>
 </main>

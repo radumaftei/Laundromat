@@ -20,6 +20,26 @@ export class WashingMachinesState {
     return state.machines;
   }
 
+  @Selector([WashingMachinesState.getMachines])
+  static getTotalMachines(state: Machine[]) {
+    return state?.length || 0;
+  }
+
+  @Selector([WashingMachinesState.getMachines])
+  static getTotalOnlineMachines(state: Machine[]) {
+    return state.filter((e) => e.status === 'online').length;
+  }
+
+  @Selector([WashingMachinesState.getMachines])
+  static getTotalOfflineMachines(state: Machine[]) {
+    return state.filter((e) => e.status === 'offline').length;
+  }
+
+  @Selector([WashingMachinesState.getMachines])
+  static getTotalUnderMaintenanceMachines(state: Machine[]) {
+    return state.filter((e) => e.status === 'maintenance').length;
+  }
+
   @Action(Actions.SetWashingMachines)
   add(
     ctx: StateContext<WashingMachinesStateModel>,
