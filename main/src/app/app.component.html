@@ -28,7 +28,7 @@
 
   <div class="card-carousel-container">
     <button
-      *ngIf="currentClientWidth() > 480"
+      *ngIf="currentClientWidth() > 480 && selectedMachines().length"
       class="carousel-arrow left-arrow"
       (click)="scroll('left')"
     >
@@ -54,7 +54,7 @@
     </div>
 
     <button
-      *ngIf="currentClientWidth() > 480"
+      *ngIf="currentClientWidth() > 480 && selectedMachines().length"
       class="carousel-arrow right-arrow"
       (click)="scroll('right')"
     >

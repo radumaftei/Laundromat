@@ -71,11 +71,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor() {
     effect(() => {
-      if (
-        (this.machines().length || this.selectedLocation()) &&
-        this.currentClientWidth() > 480
-      ) {
-        setTimeout(() => this.onScroll(), 300);
+      if (this.selectedMachines().length && this.currentClientWidth() > 480) {
+        setTimeout(() => {
+          this.onScroll();
+        }, 300);
       }
     });
   }
