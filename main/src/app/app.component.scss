@@ -1,19 +1,56 @@
-main {
+.main {
   .locations {
     .mat-mdc-chip-set {
       max-width: 200px;
     }
   }
 
-  .machines {
-    width: 100%;
-    min-height: 60%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: inherit;
+  .card-carousel-container {
     position: relative;
-    gap: 16px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    scroll-behavior: smooth;
+    overflow: hidden;
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1;
+
+      &.left-arrow {
+        left: 0;
+      }
+
+      &.right-arrow {
+        right: 0;
+      }
+    }
+
+    .card-list-wrapper {
+      flex: 1;
+      overflow: hidden;
+      scroll-behavior: smooth;
+
+      .card-list {
+        display: flex;
+        gap: 16px;
+        padding: 0 10px;
+
+        app-washing-machine-card {
+          min-width: 200px;
+          transition: transform 0.3s, opacity 0.3s;
+          &.faded {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
   }
 }

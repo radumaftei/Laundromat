@@ -10,14 +10,26 @@
     </mat-chip-listbox>
   </div>
 
-  <div class="machines">
-    @for (machine of selectedMachines(); track machine.id) {
-    <app-washing-machine-card
-      [machine]="machine"
-      [location]="selectLocationByMachine(machine.locationId)"
-    ></app-washing-machine-card>
-    } @empty {
-    <li>There are no machines available.</li>
-    }
+  <div class="card-carousel-container">
+    <button class="carousel-arrow left-arrow" (click)="scroll('left')">
+      &lt;
+    </button>
+
+    <div class="card-list-wrapper" #cardListWrapper>
+      <div class="card-list">
+        @for (machine of selectedMachines(); track machine.id) {
+        <app-washing-machine-card
+          [machine]="machine"
+          [location]="selectLocationByMachine(machine.locationId)"
+        ></app-washing-machine-card>
+        } @empty {
+        <li>There are no machines available.</li>
+        }
+      </div>
+    </div>
+
+    <button class="carousel-arrow right-arrow" (click)="scroll('right')">
+      &gt;
+    </button>
   </div>
 </main>

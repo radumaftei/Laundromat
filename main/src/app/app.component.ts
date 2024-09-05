@@ -1,9 +1,13 @@
 import {
+  AfterViewInit,
   Component,
   computed,
+  ElementRef,
   inject,
   OnInit,
+  Renderer2,
   signal,
+  ViewChild,
   WritableSignal,
 } from '@angular/core';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
@@ -19,9 +23,13 @@ import { StoreServiceFacade } from './store/store-facade.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   private readonly appService = inject(AppService);
   private readonly storeServiceFacade = inject(StoreServiceFacade);
+  private readonly renderer = inject(Renderer2);
+
+  @ViewChild('cardListWrapper', { static: true })
+  cardListWrapper!: ElementRef<HTMLDivElement>;
 
   selectedMachines = computed(() => {
     const selectedLoc = this.selectedLocation();
@@ -49,6 +57,21 @@ export class AppComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.preventScrolling();
+    setTimeout(() => {
+      this.onScroll();
+    }, 200);
+  }
+
+  preventScrolling() {
+    const element = this.cardListWrapper.nativeElement;
+    this.renderer.listen(element, 'wheel', (event) => event.preventDefault());
+    this.renderer.listen(element, 'mousedown', (event) =>
+      event.preventDefault()
+    );
+  }
+
   onLocationChange(event: MatChipListboxChange) {
     this.selectedLocation.set(
       this.locations()?.find((item) => item.name === event.value)
@@ -57,5 +80,47 @@ export class AppComponent implements OnInit {
 
   selectLocationByMachine(locationId: number): Location | undefined {
     return this.locations().find((e) => e.id === locationId);
+  }
+
+  scroll(direction: 'left' | 'right') {
+    const scrollAmount = 150;
+
+    if (direction === 'left') {
+      this.cardListWrapper.nativeElement.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth',
+      });
+    } else if (direction === 'right') {
+      this.cardListWrapper.nativeElement.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+
+    setTimeout(() => this.onScroll(), 300);
+  }
+
+  onScroll(): void {
+    const scrollLeft = this.cardListWrapper.nativeElement.scrollLeft;
+    const clientWidth = this.cardListWrapper.nativeElement.clientWidth;
+    const cardWidth = 200;
+    const children = this.cardListWrapper.nativeElement.querySelectorAll(
+      '.card-list > app-washing-machine-card'
+    );
+
+    const firstVisibleIndex = Math.floor(scrollLeft / cardWidth) + 1;
+    const lastVisibleIndex =
+      Math.ceil((scrollLeft + clientWidth) / cardWidth) - 1;
+
+    children.forEach((child, index) => {
+      if (
+        (index < firstVisibleIndex && firstVisibleIndex !== 1) ||
+        index >= lastVisibleIndex
+      ) {
+        child.classList.add('faded');
+      } else {
+        child.classList.remove('faded');
+      }
+    });
   }
 }
