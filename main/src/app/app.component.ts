@@ -2,16 +2,17 @@ import {
   Component,
   computed,
   inject,
+  OnInit,
   signal,
   WritableSignal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
-import { tap } from 'rxjs';
+import { merge } from 'rxjs';
 import { Location } from './app.model';
 import { AppService } from './app.service';
 import { WashingMachineCardComponent } from './components/washing-machine-card/washing-machine-card.component';
-import { StoreServiceFacade } from './store/store.service';
+import { StoreServiceFacade } from './store/store-facade.service';
 
 @Component({
   selector: 'app-root',
@@ -20,18 +21,9 @@ import { StoreServiceFacade } from './store/store.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'Laundromat';
+export class AppComponent implements OnInit {
   private readonly appService = inject(AppService);
   private readonly storeServiceFacade = inject(StoreServiceFacade);
-
-  machines = toSignal(
-    this.appService.getMachines().pipe(
-      tap((machines) => {
-        this.storeServiceFacade.dispatchWashingMachines(machines);
-      })
-    )
-  );
 
   selectedMachines = computed(() => {
     const selectedLoc = this.selectedLocation();
@@ -45,8 +37,19 @@ export class AppComponent {
     return this.machines() || [];
   });
 
-  locations = toSignal(this.appService.getLocations());
+  machines = this.storeServiceFacade.machines;
+  locations = this.storeServiceFacade.locations;
   selectedLocation: WritableSignal<Location | undefined> = signal(undefined);
+
+  ngOnInit(): void {
+    this.appService.getMachines().subscribe((machines) => {
+      this.storeServiceFacade.dispatchWashingMachines(machines);
+    });
+
+    this.appService.getLocations().subscribe((machines) => {
+      this.storeServiceFacade.dispatchLocations(machines);
+    });
+  }
 
   onLocationChange(event: MatChipListboxChange) {
     this.selectedLocation.set(

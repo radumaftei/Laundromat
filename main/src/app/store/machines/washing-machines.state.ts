@@ -16,26 +16,24 @@ export interface WashingMachinesStateModel {
 @Injectable()
 export class WashingMachinesState {
   @Selector()
-  static getState(state: WashingMachinesStateModel) {
-    return state;
+  static getMachines(state: WashingMachinesStateModel) {
+    return state.machines;
   }
 
-  @Action(Actions.WashingMachinesAction)
+  @Action(Actions.SetWashingMachines)
   add(
     ctx: StateContext<WashingMachinesStateModel>,
-    { machineArray }: Actions.WashingMachinesAction
+    { machineArray }: Actions.SetWashingMachines
   ) {
     ctx.setState({
       machines: machineArray,
     });
   }
 
-  @Action(Actions.WashingMachinesEditAction)
+  @Action(Actions.EditWashingMachine)
   edit(
     ctx: StateContext<WashingMachinesStateModel>,
-    {
-      machineToEditPayload: { id, newMachine },
-    }: Actions.WashingMachinesEditAction
+    { machineToEditPayload: { id, newMachine } }: Actions.EditWashingMachine
   ) {
     const stateModel = ctx.getState();
 
@@ -52,10 +50,10 @@ export class WashingMachinesState {
     });
   }
 
-  @Action(Actions.WashingMachinesDeleteAction)
+  @Action(Actions.DeleteWashingMachine)
   delete(
     ctx: StateContext<WashingMachinesStateModel>,
-    { id }: Actions.WashingMachinesDeleteAction
+    { id }: Actions.DeleteWashingMachine
   ) {
     const stateModel = ctx.getState();
     ctx.setState({

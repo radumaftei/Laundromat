@@ -9,7 +9,7 @@ import { WashingMachineDeleteModalComponent } from '../washing-machine-delete-mo
 import { WashingMachineEditModalComponent } from '../washing-machine-edit-modal/washing-machine-edit-modal.component';
 
 import { Subscription } from 'rxjs';
-import { StoreServiceFacade } from '../../store/store.service';
+import { StoreServiceFacade } from '../../store/store-facade.service';
 import { DeleteMachineModel } from '../washing-machine-delete-modal/delete.model';
 import { EditMachineModel } from '../washing-machine-edit-modal/edit.model';
 

@@ -1,11 +1,11 @@
 import { Machine } from '../../app.model';
 
-export class WashingMachinesAction {
+export class SetWashingMachines {
   static readonly type = '[WashingMachines] Add machines';
   constructor(readonly machineArray: Machine[]) {}
 }
 
-export class WashingMachinesEditAction {
+export class EditWashingMachine {
   static readonly type = '[WashingMachines] Edit machine';
   constructor(
     readonly machineToEditPayload: {
@@ -15,7 +15,7 @@ export class WashingMachinesEditAction {
   ) {}
 }
 
-export class WashingMachinesDeleteAction {
+export class DeleteWashingMachine {
   static readonly type = '[WashingMachines] Delete machine';
   constructor(readonly id: number) {}
 }
