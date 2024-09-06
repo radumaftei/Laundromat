@@ -1,15 +1,23 @@
-// jest.config.js
 module.exports = {
   preset: "jest-preset-angular",
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/src/setup-jest.ts"],
-  globalSetup: "jest-preset-angular/global-setup",
-  testPathIgnorePatterns: ["/node_modules/", "/dist/", "/e2e/"],
   moduleFileExtensions: ["ts", "html", "js", "json"],
   transform: {
-    "^.+\\.(ts|js|html)$": "jest-preset-angular",
+    "^.+\\.(ts|mjs|js|html)$": "jest-preset-angular",
+    "^.+\\.scss$": "jest-scss-transform",
   },
+  moduleNameMapper: {
+    "^.+\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "^.+\\.(html)$": "<rootDir>/jest-empty-module.js",
+  },
+  transformIgnorePatterns: ["node_modules/(?!.*\\.mjs$)"],
   collectCoverage: true,
   coverageReporters: ["html", "text-summary"],
   coverageDirectory: "coverage/jest",
+  collectCoverageFrom: [
+    "src/**/*.{js,ts}", // Adjust this pattern to match your source files
+    "!src/**/*.spec.{js,ts}", // Exclude test files
+    "!src/**/index.{js,ts}", // Exclude index files if necessary
+  ],
 };
